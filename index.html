@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta name='viewport' content='width=device-width, user-scalable=no'>
+    <title>Zappos Slot Machine WebView</title>
+    <script src='js/jquery.min.js'></script>
+    <script src='js/jquery-ui.min.js'></script>
+    <script src='js/touchpunch.min.js'></script>
+    <script src='js/jquery.ease.min.js'></script>
+    <link rel='stylesheet' href='css/style.min.css'></link>
+  </head>
+  <body oncontextmenu="return false">
+    <div class='container'>
+      <div id='machine'>
+        <div class="alarm">
+          <img id='alarm-img' src='img/alarm1.png' />
+        </div>
+        <div class='slot-header'>
+          <img class="slot-header-bg" src="img/logoArea.png" />
+          <img class='header-text-logo' src="img/logo.png" />
+          <img class='header-text-super' src="img/super.png" />
+          <img class='header-text-rec' src="img/recommender.png" />
+        </div>
+        <div class="wheel-wrapper">
+          <div class='jSlots-wrapper'>
+            <ul class='slot'></ul>
+            <ul class='slot'></ul>
+            <ul class='slot'></ul>
+          </div>
+        </div>
+        <div class="control-panel">
+          <img src="img/spinning.png" />
+          <div class="controls">
+            <input type="button" id="playBtn" value="SPIN">
+          </div>
+        </div>
+      </div>
+      <div class='pull-container'>
+        <div class='lever-container'>
+          <div class="lever-base"></div>
+          <div class="lever-rod"></div>
+          <div class='lever-handle'></div>
+          <div class='lever-handle-target'>
+            <!-- Pull me -->
+          </div>
+        </div>
+      </div>
+      <div class="results">
+        <div class="result-status"></div>
+        <div class="result-product">
+          <div class="product-image-container">
+            <img class="product-image" src='img.png' />
+          </div>
+          <div class="product-text">
+            <div class="product-name"></div>
+            <div class="product-brand"></div>
+          </div>
+          <div class="product-price"></div>
+        </div>
+      </div>
+    </div>
+    <script src="js/modifyDOM.min.js"></script>
+    <script src="js/jquery.jSlots.js" charset="utf-8"></script>
+    <script src='js/script.min.js'></script>
+  </body>
+</html>
