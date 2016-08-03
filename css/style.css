@@ -1,4 +1,5 @@
 body,html {
+  position:fixed;
   margin:0;
   font-family: sans-serif;
   background-color: #FEE5DA;
