@@ -1,0 +1,30 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>WUSM Test</title>
+	<link rel="stylesheet" type="text/css" href="../style.css">
+</head>
+<body>
+
+	<div class="nav">
+		WUSM
+	</div>
+	<div class="container">
+		<h2>Ventricular Septal Defect</h2>
+		<h2>&nbsp;</h2>
+		<div id="code">
+		</div>
+		<a href="../index.html" class="">
+				<- Restart
+			</a>
+	</div>
+	<script type="text/javascript">
+	var url = window.location.href;
+	var q = url.indexOf('?');
+	var code =  (url.substring(q+1,url.length));
+	document.getElementById("code").innerHTML = "<h1>"+code+"</h1>";
+</script>
+
+</body>
+</html>
