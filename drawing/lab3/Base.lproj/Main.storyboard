@@ -18,45 +18,39 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Width" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kQK-nO-adO">
-                                <rect key="frame" x="54" y="497" width="46" height="21"/>
+                                <rect key="frame" x="44" y="541" width="46" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Opacity" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lp7-Nt-LS8">
-                                <rect key="frame" x="279" y="497" width="60" height="21"/>
+                                <rect key="frame" x="279" y="541" width="60" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zwe-PM-GSP">
-                                <rect key="frame" x="327" y="28" width="39" height="30"/>
+                                <rect key="frame" x="328" y="22" width="39" height="30"/>
                                 <state key="normal" title="Reset"/>
                                 <connections>
                                     <action selector="resetDrawing:" destination="BYZ-38-t0r" eventType="primaryActionTriggered" id="pDe-mc-wVb"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9bz-AV-LbA">
-                                <rect key="frame" x="272" y="28" width="38" height="30"/>
+                                <rect key="frame" x="10" y="22" width="38" height="30"/>
                                 <state key="normal" title="Undo"/>
                                 <connections>
                                     <action selector="undoButtonPressed:" destination="BYZ-38-t0r" eventType="primaryActionTriggered" id="LJ2-z6-tns"/>
                                 </connections>
                             </button>
                             <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="10" minValue="0.0" maxValue="20" translatesAutoresizingMaskIntoConstraints="NO" id="Hpj-VV-hjB">
-                                <rect key="frame" x="19" y="514" width="118" height="31"/>
+                                <rect key="frame" x="8" y="558" width="118" height="31"/>
                                 <connections>
                                     <action selector="widthSliderChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="BhM-2t-QmA"/>
                                 </connections>
                             </slider>
-                            <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minValue="0.050000000000000003" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="XBy-W5-taQ">
-                                <rect key="frame" x="251" y="514" width="118" height="31"/>
-                                <connections>
-                                    <action selector="opacitySliderChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="gG8-fS-SpQ"/>
-                                </connections>
-                            </slider>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uvC-bX-ZPm">
-                                <rect key="frame" x="31" y="577" width="48" height="47"/>
+                                <rect key="frame" x="19" y="597" width="48" height="47"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="100"/>
                                 <state key="normal" title="•">
                                     <color key="titleColor" red="0.81568627450980391" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -66,7 +60,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" tag="1" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aMR-XU-mjT">
-                                <rect key="frame" x="84" y="577" width="48" height="47"/>
+                                <rect key="frame" x="77" y="597" width="48" height="47"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="100"/>
                                 <state key="normal" title="•">
                                     <color key="titleColor" red="0.0" green="0.4392156862745098" blue="0.74117647058823533" alpha="1" colorSpace="calibratedRGB"/>
@@ -76,7 +70,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" tag="2" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4dx-ze-QMZ">
-                                <rect key="frame" x="140" y="577" width="48" height="47"/>
+                                <rect key="frame" x="136" y="597" width="48" height="47"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="100"/>
                                 <state key="normal" title="•">
                                     <color key="titleColor" red="0.0" green="0.67450980392156867" blue="0.38823529411764707" alpha="1" colorSpace="calibratedRGB"/>
@@ -86,7 +80,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" tag="3" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IU3-KH-Egh">
-                                <rect key="frame" x="196" y="577" width="48" height="47"/>
+                                <rect key="frame" x="194" y="597" width="48" height="47"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="100"/>
                                 <state key="normal" title="•">
                                     <color key="titleColor" red="0.99607843137254903" green="0.94509803921568625" blue="0.098039215686274508" alpha="1" colorSpace="calibratedRGB"/>
@@ -96,7 +90,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" tag="4" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hlp-IN-0bl">
-                                <rect key="frame" x="252" y="577" width="48" height="47"/>
+                                <rect key="frame" x="251" y="597" width="48" height="47"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="100"/>
                                 <state key="normal" title="•">
                                     <color key="titleColor" red="0.4823529411764706" green="0.12156862745098039" blue="0.69411764705882351" alpha="1" colorSpace="calibratedRGB"/>
@@ -106,7 +100,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" tag="5" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hHz-We-NWM">
-                                <rect key="frame" x="307" y="577" width="48" height="47"/>
+                                <rect key="frame" x="307" y="597" width="48" height="47"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="100"/>
                                 <state key="normal" title="•">
                                     <color key="titleColor" red="1" green="0.65490196078431373" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -115,11 +109,22 @@
                                     <action selector="changeColor:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ROH-0J-0zF"/>
                                 </connections>
                             </button>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XQg-1U-3qH">
+                                <rect key="frame" x="0.0" y="49" width="376" height="475"/>
+                                <color key="backgroundColor" red="0.98039215690000003" green="0.98039215690000003" blue="0.97254901959999995" alpha="1" colorSpace="calibratedRGB"/>
+                            </imageView>
+                            <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minValue="0.050000000000000003" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="XBy-W5-taQ">
+                                <rect key="frame" x="251" y="558" width="118" height="31"/>
+                                <connections>
+                                    <action selector="opacitySliderChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="gG8-fS-SpQ"/>
+                                </connections>
+                            </slider>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <connections>
                         <outlet property="alphaSlider" destination="XBy-W5-taQ" id="BaW-el-YTv"/>
+                        <outlet property="canvas" destination="XQg-1U-3qH" id="FJ0-2t-Dr6"/>
                         <outlet property="widthSlider" destination="Hpj-VV-hjB" id="ZuP-fb-aRN"/>
                     </connections>
                 </viewController>

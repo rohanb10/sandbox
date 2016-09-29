@@ -12,6 +12,7 @@ class ViewController: UIViewController {
 	
 	@IBOutlet weak var widthSlider: UISlider!
 	@IBOutlet weak var alphaSlider: UISlider!
+	@IBOutlet weak var canvas: UIImageView!
 	var thickness = CGFloat(15);
 	
 	var colors:[UIColor] = [
@@ -29,6 +30,7 @@ class ViewController: UIViewController {
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
+		self.view.addSubview(canvas)
 		currentColor = colors[0]
 		previewBrush()
 	}
@@ -54,17 +56,15 @@ class ViewController: UIViewController {
 	}
 	
 	@IBAction func resetDrawing(sender: AnyObject) {
-		for layer: CALayer in self.view.layer.sublayers! {
-			if(layer.name != nil && (layer.name!.containsString("path") || layer.name!.containsString("moving"))){
-				layer.removeFromSuperlayer()
-			}
+		while(paths.count > 0){
+			canvas.layer.sublayers?.removeLast()
+			paths.removeLast()
 		}
-		paths.removeAll()
 	}
 	
 	@IBAction func undoButtonPressed(sender: AnyObject) {
 		if(paths.count > 0){
-			self.view.layer.sublayers?.removeLast()
+			canvas.layer.sublayers?.removeLast()
 			paths.removeLast()
 		}
 	}
@@ -72,56 +72,65 @@ class ViewController: UIViewController {
 	//CREATIVE PORTION: Draws a preview of the brush with the correct opacity/thickness
 	func previewBrush(){
 		//Remove old preview
-		for layer: CALayer in self.view.layer.sublayers! {
-			if(layer.name != nil && layer.name!.containsString("preview")){
-				layer.removeFromSuperlayer()
+		if(self.view.layer.sublayers?.count>0){
+			for layer: CALayer in self.view.layer.sublayers! {
+				if(layer.name != nil && layer.name!.containsString("preview")){
+					layer.removeFromSuperlayer()
+				}
 			}
 		}
 		//Add new preview
-		let preview = UIBezierPath(roundedRect: CGRectMake(194.0 - (thickness/2), 530.0-(thickness/2), thickness/2, thickness/2), cornerRadius: thickness/2)
+		let preview = UIBezierPath(roundedRect: CGRectMake(194 - (thickness/2), 577-(thickness/2), thickness/2, thickness/2), cornerRadius: thickness/2)
 		draw(preview, fill:currentColor, shapeName: "preview")
 	}
 	
 	override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-		let touchPoint = (touches.first)!.locationInView(self.view) as CGPoint
+		let touchPoint = (touches.first)!.locationInView(canvas) as CGPoint
 		currentPath.append(touchPoint)
 	}
 	
 	override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
 		for t in touches {
-			currentPath.append(t.locationInView(self.view) as CGPoint)
-			//draw path while gesture incomplete (opacity does not work)
-			draw(createQuadPath(currentPath),fill: UIColor.clearColor(),shapeName: "moving")
+			currentPath.append(t.locationInView(canvas) as CGPoint)
+			
 		}
-		
-		
+		//clear previously drawn temporary path
+		removeTempPaths()
+		//draw temporary path while gesture incomplete
+		draw(createQuadPath(currentPath),fill: UIColor.clearColor(),shapeName: "moving")
 	}
 	
 	override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
-		//remove temporary path created in touchesMoved()
-		for layer: CALayer in self.view.layer.sublayers! {
-			if(layer.name != nil && layer.name!.containsString("moving")){
-				layer.removeFromSuperlayer()
-			}
-		}
+		
+		removeTempPaths()
 		
 		//redraw permanent path with correct opacity
 		var p = UIBezierPath()
-		var fill = UIColor()
 		if(currentPath.count > 1){
 			p = createQuadPath(currentPath)
-			fill = UIColor.clearColor()
+			draw(p,fill: UIColor.clearColor(),shapeName: "path")
 		}
 		else{
 			//if screen is just tapped and not dragged
 			p = UIBezierPath(roundedRect: CGRectMake(currentPath[0].x - thickness/2, currentPath[0].y-thickness/2, thickness/2, thickness/2), cornerRadius: thickness/2)
-			fill = currentColor
+			draw(p,fill: currentColor,shapeName: "point")
 		}
-		draw(p,fill: fill,shapeName: "path")
+		
 		
 		//Add to paths array and reset currentPath
 		paths.append(p);
 		currentPath = []
+	}
+	
+	//remove temporary path created in touchesMoved()
+	func removeTempPaths(){
+		if(canvas.layer.sublayers?.count>0){
+			for layer: CALayer in canvas.layer.sublayers! {
+				if(layer.name != nil && layer.name!.containsString("moving")){
+					layer.removeFromSuperlayer()
+				}
+			}
+		}
 	}
 	
 	//Helper function to draw UIBezierPath, fill with UIColor, and assign the name -> ShapeName and then add to layer
@@ -129,10 +138,19 @@ class ViewController: UIViewController {
 		let shapeLayer = CAShapeLayer()
 		shapeLayer.path = p.CGPath
 		shapeLayer.strokeColor = currentColor.CGColor
-		shapeLayer.fillColor = fill.CGColor
+		shapeLayer.fillColor = UIColor.clearColor().CGColor
 		shapeLayer.lineWidth = thickness
 		shapeLayer.name = shapeName
-		self.view.layer.addSublayer(shapeLayer)
+		shapeLayer.lineCap = kCALineCapRound
+		if(shapeName == "path"){
+			shapeLayer.fillColor = fill.CGColor
+		}
+		if(shapeName == "preview"){
+			self.view.layer.addSublayer(shapeLayer)
+		}
+		else{
+			canvas.layer.addSublayer(shapeLayer)
+		}
 	}
 	
 	//Calculate the midpoint between two CGpoints
@@ -156,6 +174,7 @@ class ViewController: UIViewController {
 		}
 		let lastLocation = arrayOfPoints.last
 		newPath.addLineToPoint(lastLocation!)
+		newPath.lineCapStyle = CGLineCap.Round
 		return newPath
 	}
 }
