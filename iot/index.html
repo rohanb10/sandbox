@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Door</title>
+  <link rel="stylesheet" type="text/css" href="css/style.css" />
+</head>
+<body>
+  <div class="door">
+    <div id="prompt">Please enter the key code:</div>
+    <h1 id="keys">_ _ _ _ _ _</h1>
+    <div class="keypad">
+      <div class="row">
+        <div onclick="tap(1)" class="button" data-key="1">1</div>
+        <div onclick="tap(2)" class="button" data-key="2">2</div>
+        <div onclick="tap(3)" class="button" data-key="3">3</div>
+      </div>
+      <div class="row">
+        <div onclick="tap(4)" class="button" data-key="4">4</div>
+        <div onclick="tap(5)" class="button" data-key="5">5</div>
+        <div onclick="tap(6)" class="button" data-key="6">6</div>
+      </div>
+      <div class="row">
+        <div onclick="tap(7)" class="button" data-key="7">7</div>
+        <div onclick="tap(8)" class="button" data-key="8">8</div>
+        <div onclick="tap(9)" class="button" data-key="9">9</div>
+      </div>
+      <div class="row">
+        <div onclick="deleteTap()" id="back" class="button disabled" data-key="delete">⌫</div>
+        <div onclick="tap(0)" class="button" data-key="0">0</div>
+        <div onclick="go()" id="go" class="button disabled" data-key="go">&#x2794;</div>
+      </div>
+    </div>
+    <div onclick="forgot()" class="blue">Forgot password?</div>
+    <div id="message"></div>
+  </div>
+  <script type="text/javascript" src="http://cdn.jsdelivr.net/particle-api-js/5/particle.min.js"></script>
+  <script src="js/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+body,html{
+  font-family: Arial, sans-serif;
+}
+.door{
+  margin: 1em auto;
+  text-align: center;
+}
+.door *{
+  user-select: none;
+}
+.keypad{
+  margin: 0 auto;
+}
+
+.button{
+  display: inline-block;
+  font-size: 1.5em;
+  padding: 1em 1.3em;
+  margin: 0.5em;
+  border: 1px solid black;
+  border-radius: 50px;
+}
+.button:hover, .blue:hover{
+  cursor: pointer;
+}
+
+.disabled{
+  border: 1px solid #AAA;
+  color: #AAA;
+}
+.blue{
+  color: #337AB7;
+}
