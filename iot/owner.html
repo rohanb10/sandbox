@@ -16,33 +16,22 @@
     function(data) {
       token = data.body.access_token;
       console.log("Logged in");
-      console.log(token)
+      console.log(token);
+      var fnPr = particle.callFunction({ deviceId: '370031001051353338363333', name: 'enable', argument: "", auth: token });
+      console.log("hey");
+      fnPr.then(
+        function(data) {
+          console.log('Door was enabled');
+          document.getElementById('text').innerHTML = "Door was enabled. <a href='index.html'>Click here to go back.</a>";
+        }, function(err) {
+          console.log('An error occurred while enabling the door:', err);
+        }
+      );
     },
     function (err) {
       console.log('Could not log in.', err);
     }
   );
-  window.setTimeout(function(){
-    if(token){
-      var password;
-      particle.getVariable({ deviceId: '370031001051353338363333', name: 'currentpass', auth: token }).then(function(data) {
-        password = data.result;
-      }, function(err) {
-        console.log('Unable to get current password');
-      });
-
-      var fnPr = particle.callFunction({ deviceId: '370031001051353338363333', name: 'enable', auth: token });
-      console.log("hey");
-      fnPr.then(
-        function(data) {
-          console.log('Door was enabled');
-          document.getElementById('text').innerHTML = "Door was enabled. The current password is: "+password;
-        }, function(err) {
-          console.log('An error occurred while enabling the door:', err);
-        }
-      );
-    }
-  }, 2000)
 </script>
 </body>
 </html>

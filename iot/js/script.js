@@ -1,5 +1,5 @@
 var particle = new Particle();
-var token, password, num_attempts;
+var token, num_attempts;
 var attempt = "";
 
 window.addEventListener('DOMContentLoaded', function() {
@@ -8,22 +8,19 @@ window.addEventListener('DOMContentLoaded', function() {
       token = data.body.access_token;
       console.log("Logged in");
 
-      particle.getVariable({ deviceId: '370031001051353338363333', name: 'currentpass', auth: token }).then(function(data) {
-        password = data.result;
-      }, function(err) {
-        disableAll();
-        console.log('Unable to get current pass');
-      });
-
       particle.getVariable({ deviceId: '370031001051353338363333', name: 'num_attempts', auth: token }).then(function(data) {
-        num_attempts = data.result;
+        num_attempts = data.body.result
+        console.log("Attempts: "+num_attempts)
+        document.getElementById('attempts').innerHTML = 3 - num_attempts;
+        if(num_attempts<3 && num_attempts>=0){
+          enableAll();
+        }
+        else{
+          disableAll();
+          document.getElementById('prompt').innerHTML = "The door is really locked. Contact the owner to enable the door.";
+        }
       }, function(err) {
         console.log('Unable to get current num_attempts');
-        console.log(num_attempts)
-        if(num_attempts<3 && num_attempts>=0){
-          // enableAll();
-        }
-        disableAll();
       });
     },
     function (err) {
@@ -57,9 +54,12 @@ function go(){
         if(data.body.return_value == 0){
           attempt="";
           num_attempts += 1;
+          document.getElementById('attempts').innerHTML = 3 - num_attempts;
           if(num_attempts >= 3){
-            document.getElementById('prompt').innerHTML = "You just got locked out. Contact the owner to enable the door.";
+            document.getElementById('prompt').innerHTML = "The door is really locked. Contact the owner to enable the door.";
+            disableAll();
           }
+          console.log("wrong code")
           updateDisplay();
         }
         if(data.body.return_value == 1){
