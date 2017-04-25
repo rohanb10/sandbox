@@ -1,20 +1,36 @@
 var particle = new Particle();
-var token;
-
-particle.login({username: 'oceanseacrest@yahoo.com', password: 'abcd1234'}).then(
-  function(data) {
-    token = data.body.access_token;
-    console.log("Logged in");
-    console.log(token)
-  },
-  function (err) {
-    console.log('Could not log in.', err);
-  }
-);
-
-var password="123456";
+var token, password, num_attempts;
 var attempt = "";
-var num_attempts = 0;
+
+window.addEventListener('DOMContentLoaded', function() {
+  particle.login({username: 'oceanseacrest@yahoo.com', password: 'abcd1234'}).then(
+    function(data) {
+      token = data.body.access_token;
+      console.log("Logged in");
+
+      particle.getVariable({ deviceId: '370031001051353338363333', name: 'currentpass', auth: token }).then(function(data) {
+        password = data.result;
+      }, function(err) {
+        disableAll();
+        console.log('Unable to get current pass');
+      });
+
+      particle.getVariable({ deviceId: '370031001051353338363333', name: 'num_attempts', auth: token }).then(function(data) {
+        num_attempts = data.result;
+      }, function(err) {
+        console.log('Unable to get current num_attempts');
+        console.log(num_attempts)
+        if(num_attempts<3 && num_attempts>=0){
+          // enableAll();
+        }
+        disableAll();
+      });
+    },
+    function (err) {
+      console.log('Could not log in.', err);
+    }
+  );
+},true);
 
 function tap(number){
   if(attempt.length<6){
@@ -25,7 +41,8 @@ function tap(number){
 }
 
 function deleteTap(){
-  if(attempt.length >= 1){
+
+  if(attempt.length >= 1 && document.getElementById('back').classList.length>=2){
     attempt = attempt.substring(0,attempt.length-1);
     updateDisplay();
   }
@@ -34,13 +51,15 @@ function deleteTap(){
 function go(){
   if(attempt.length==6){
     var fnPr = particle.callFunction({ deviceId: '370031001051353338363333', name: 'attempt', argument: attempt, auth: token });
-
     fnPr.then(
       function(data) {
         console.log('Function called succesfully:', data);
         if(data.body.return_value == 0){
-          num_attempts += 1;
           attempt="";
+          num_attempts += 1;
+          if(num_attempts >= 3){
+            document.getElementById('prompt').innerHTML = "You just got locked out. Contact the owner to enable the door.";
+          }
           updateDisplay();
         }
         if(data.body.return_value == 1){
@@ -97,6 +116,7 @@ function updateDisplay(){
     }
   }
   var code = attempt;
+  //format code for printing
   while(code.length<6){
     code+="_";
   }
@@ -104,6 +124,7 @@ function updateDisplay(){
   document.getElementById("keys").innerHTML = code;
 }
 
+//disables all buttons
 function disableAll(){
   var buttons = document.getElementsByClassName('button');
   for(var i=0;i<buttons.length;i++){
@@ -112,4 +133,10 @@ function disableAll(){
 }
 
 
-// var url = "https://api.particle.io/v1/devices/370031001051353338363333/attempt?access_token=23980d2c1bd524bb8d4e8ce880639c45125e55b3"
+function enableAll(){
+  var buttons = document.getElementsByClassName('button');
+  for(var i=0;i<buttons.length;i++){
+    buttons[i].classList.remove('disabled');
+  }
+  updateDisplay();
+}
